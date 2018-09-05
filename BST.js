@@ -47,23 +47,23 @@ contains(value) {
 
 remove(value, parent = null) {
     if(this.value > value){
-        if(this.left){
+        if (this.left){
             this.left.remove(value, this)
         }
     }else if (this.value < value){
-        if(this.value){
+        if (this.right){
             this.right.remove(value, this)
         }
     }else {
         if(this.left && this.right){
             this.value = this.right.getMin(this.right)
-            this.right.remove(this.value,this)
-        }else if (!this.parent){
+            this.right.remove(this.value, this)
+        }else if (!parent){
             if(this.left){
                 this.value = this.left.value
                 this.right = this.left.right
                 this.left = this.left.left
-            }else if (this.right){
+            }else if(this.right){
                 this.value = this.right.value
                 this.left = this.right.left
                 this.right = this.right.right
@@ -75,16 +75,15 @@ remove(value, parent = null) {
         }else {
             if(parent.left === this){
                 parent.left = this.left ? this.left : this.right
-            }else if (parent.right === this){
-                parent.right = this.left ? this.left : this.right
+            }else {
+                parent.right = this.left ? this.left: this.right
             }
         }
     }
-    return this
 }
 getMin(tree){
     let CurrentTree = tree
-    while(CurrentTree.left){
+    while (CurrentTree.left){
         CurrentTree = CurrentTree.left
     }
     return CurrentTree.value
